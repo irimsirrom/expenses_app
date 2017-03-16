@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="expenseCalculator">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Calculator</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="app.js"></script>
+
+</head>
+<body ng-controller="expenseCalculatorController">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Expense Calculator</h1>
+        </div>
+        <div id="todo-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+
+              <table class="table">
+                <tr ng-repeat="expense in expenses">
+                  <td>{{ expense.text }}</td>
+                  <td>{{ expense.amount }}</td>
+                  <td>{{ expense.type }}</td>
+                </tr>
+                <span>Total Spent: {{}}</span>
+              </table>
+
+
+
+                <!-- <div class="checkbox" ng-repeat="expense in expenses">
+                    <label>
+                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.text }}
+                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.amount }}
+                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.type }}
+                    </label>
+                </div> -->
+
+            </div>
+        </div>
+
+        <form>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Expense Description</label>
+              <input type="text" class="form-control" ng-model="formData.text" placeholder="Expense">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Amount</label>
+              <input type="number" class="form-control" ng-model="formData.amount" placeholder="Amount">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Expense Type</label>
+              <select class="form-control" ng-model="formData.type">
+                <option>Bill</option>
+                <option>Food</option>
+                <option>Rent</option>
+                <option>Entertainment</option>
+                <option>Other</option>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" ng-click="createExpense()">Add</button>
+        </form>
+    </div>
+
+</body>
+</html>
