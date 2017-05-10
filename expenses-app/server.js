@@ -4,6 +4,7 @@
     var morgan = require('morgan');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
+    var fetch = require('node-fetch');
 
     mongoose.connect('mongodb://irimsirrom:Mirilivesat167@ds133290.mlab.com:33290/testing', function(err, db) {
         if (err) {
@@ -24,7 +25,11 @@
       var Expenses = mongoose.model('Expenses', {
           text : String,
           amount: Number,
-          type: String
+          type: String,
+          currency: String,
+          usd: Number,
+          cdn: Number,
+          nis: Number
       });
 
     // routes ======================================================================
@@ -38,12 +43,26 @@
           });
       });
 
+
+      app.get('/api/currency', function(req, res){
+        fetch('http://www.apilayer.net/api/live?access_key=09eab4c2dd605db2575ecae2b79ecf9f')
+          .then(function(res) {
+            return res.json();
+          }).then(function(json) {
+              console.log(json);
+            });
+      }
+
       // post
       app.post('/api/expenses', function(req, res) {
           Expenses.create({
               text : req.body.text,
               amount : req.body.amount,
               type : req.body.type,
+              currency : req.body.currency,
+              usd : req.body.usd,
+              cdn : req.body.cdn,
+              nis : req.body.nis,
               done : false
           }, function(err, expense) {
               if (err)

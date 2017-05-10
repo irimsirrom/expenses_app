@@ -22,21 +22,11 @@
               <table class="table">
                 <tr ng-repeat="expense in expenses">
                   <td>{{ expense.text }}</td>
-                  <td>{{ expense.amount }}</td>
+                  <td>{{ expense.amount }}&nbsp;{{expense.currency}}</td>
                   <td>{{ expense.type }}</td>
                 </tr>
-                <span>Total Spent: {{}}</span>
               </table>
-
-
-
-                <!-- <div class="checkbox" ng-repeat="expense in expenses">
-                    <label>
-                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.text }}
-                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.amount }}
-                        <input type="checkbox" ng-click="deleteExpense(expense._id)"> {{ expense.type }}
-                    </label>
-                </div> -->
+              <span>Total Spent: {{getTotal('amount', 'currency')}} NIS</span>
 
             </div>
         </div>
@@ -52,12 +42,20 @@
           </div>
           <div class="form-group">
               <label for="exampleInputEmail1">Expense Type</label>
-              <select class="form-control" ng-model="formData.type">
+              <select label="Type" class="form-control" ng-model="formData.type">
                 <option>Bill</option>
                 <option>Food</option>
                 <option>Rent</option>
                 <option>Entertainment</option>
                 <option>Other</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Currency</label>
+              <select label="Type" class="form-control" ng-model="formData.currency">
+                <option>USD</option>
+                <option>CDN</option>
+                <option>NIS</option>
               </select>
           </div>
           <button type="submit" class="btn btn-primary btn-lg" ng-click="createExpense()">Add</button>
